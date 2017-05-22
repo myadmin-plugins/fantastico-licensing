@@ -1,6 +1,6 @@
 {
     "name": "detain/myadmin-fantastico",
-    "type": "library",
+    "type": "myadmin-plugin",
     "description": "Fantastico Licensing Class",
     "keywords": ["fantastico","administration","license"],
     "license": "LGPL-2.1",
