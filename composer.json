@@ -12,7 +12,8 @@
     ],
     "require": {
         "php": ">=5.0.0",
-        "ext-soap": "*"
+        "ext-soap": "*",
+	"detain/fantastico": "dev-master"
     },
     "autoload": {
         "psr-4": {"detain\\MyAdmin-Fantastico\\": "src/"}
