@@ -10,6 +10,9 @@
             "homepage": "https://my.interserver.net/"
         }
     ],
+    "config": {
+        "minimum-stability": "dev"
+    },
     "require": {
         "php": ">=5.0.0",
         "ext-soap": "*",
