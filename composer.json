@@ -1,0 +1,20 @@
+{
+    "name": "detain/myadmin-fantastico",
+    "type": "library",
+    "description": "Fantastico Licensing Class",
+    "keywords": ["fantastico","administration","license"],
+    "license": "LGPL-2.1",
+    "authors": [
+        {
+            "name": "Joe Huss",
+            "homepage": "https://my.interserver.net/"
+        }
+    ],
+    "require": {
+        "php": ">=5.0.0",
+        "ext-soap": "*"
+    },
+    "autoload": {
+        "psr-4": {"detain\\MyAdmin-Fantastico\\": "src/"}
+    }
+}
