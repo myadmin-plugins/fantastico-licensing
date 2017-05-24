@@ -1,6 +1,6 @@
 <?php
 
-namespace detain\MyAdmin-Fantastico;
+namespace detain\MyAdminFantastico;
 
 use Symfony\Component\EventDispatcher\GenericEvent;
 
