@@ -29,5 +29,6 @@ return [
 	'settings' => [
 	],
 	'hooks' => [
+		'licenses.settings' => ['Detain\MyAdminFantastico\Settings', 'update']
 	],
 ];
