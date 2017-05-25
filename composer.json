@@ -10,9 +10,6 @@
             "homepage": "https://my.interserver.net/"
         }
     ],
-    "config": {
-        "minimum-stability": "dev"
-    },
     "repositories": [
         {
             "type": "git",
@@ -24,7 +21,7 @@
         "ext-soap": "*",
 	"symfony/event-dispatcher": "*",
 	"detain/myadmin-plugin-installer": "dev-master",
-	"detain/fantastico": ">=1.0.2"
+	"detain/fantastico": "*"
     },
     "autoload": {
         "psr-4": {"Detain\\MyAdminFantastico\\": "src/"}
