@@ -1,12 +1,5 @@
 <?php
-/* binds/hooks/events
-libraries to use for events:	http://symfony.com/doc/current/components/event_dispatcher.html
-Event Name Rules:
- - Use only lowercase letters, numbers, dots (.) and underscores (_);
- - Prefix names with a namespace followed by a dot (e.g. order., user.*);
- - End names with a verb that indicates what action has been taken (e.g. order.placed).
-TODO:
- - add easy way to call/hook into activate/deactivate/chagne ip functions
+/* TODO:
  - service type, category, and services  adding
  - dealing with the SERVICE_TYPES_fantastico define
  - add way to call/hook into install/uninstall
