@@ -29,6 +29,7 @@ return [
 	'settings' => [
 	],
 	'hooks' => [
-		'licenses.settings' => ['Detain\MyAdminFantastico\Settings', 'update']
+		'licenses.settings' => ['Detain\MyAdminFantastico\Settings', 'update'],
+		'ui.menu' => ['Detain\MyAdminFantastico\Menu', 'update']
 	],
 ];
