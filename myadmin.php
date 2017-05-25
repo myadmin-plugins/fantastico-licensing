@@ -25,6 +25,7 @@ return [
 		'function.requirements' => ['Detain\MyAdminFantastico\Requirements', 'update'],
 		'licenses.settings' => ['Detain\MyAdminFantastico\Settings', 'update'],
 		'licenses.activate' => ['Detain\MyAdminFantastico\Activate', 'update'],
+		'licenses.change_ip' => ['Detain\MyAdminFantastico\ChangeIp', 'update'],
 		'ui.menu' => ['Detain\MyAdminFantastico\Menu', 'update']
 	],
 ];
