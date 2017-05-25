@@ -23,6 +23,7 @@ return [
 	'version' => '1.0.0',
 	'type' => 'licenses',
 	'hooks' => [
+		'function.requirements' => ['Detain\MyAdminFantastico\Requirements', 'update'],
 		'licenses.settings' => ['Detain\MyAdminFantastico\Settings', 'update'],
 		'ui.menu' => ['Detain\MyAdminFantastico\Menu', 'update']
 	],
