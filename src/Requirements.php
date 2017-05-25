@@ -16,6 +16,7 @@ class Requirements {
 		$loader->add_requirement('crud_reusable_fantastico', '/../vendor/detain/crud/src/crud/crud_reusable_fantastico.php');
 		$loader->add_requirement('get_fantastico_licenses', '/licenses/fantastico.functions.inc.php');
 		$loader->add_requirement('get_fantastico_list', '/licenses/fantastico.functions.inc.php');
+		$loader->add_requirement('fantastico_licenses_list', '/licenses/fantastico.functions.inc.php');
 		$loader->add_requirement('fantastico_list', '/licenses/fantastico.functions.inc.php');
 		$loader->add_requirement('get_available_fantastico', '/licenses/fantastico.functions.inc.php');
 		$loader->add_requirement('activate_fantastico', '/licenses/fantastico.functions.inc.php');
