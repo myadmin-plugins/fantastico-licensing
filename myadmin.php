@@ -7,7 +7,6 @@ Event Name Rules:
  - End names with a verb that indicates what action has been taken (e.g. order.placed).
 TODO:
  - add easy way to call/hook into activate/deactivate/chagne ip functions
- - add easy way to call extra page / functions
  - service type, category, and services  adding
  - dealing with the SERVICE_TYPES_fantastico define
  - add way to call/hook into install/uninstall
@@ -25,6 +24,7 @@ return [
 	'hooks' => [
 		'function.requirements' => ['Detain\MyAdminFantastico\Requirements', 'update'],
 		'licenses.settings' => ['Detain\MyAdminFantastico\Settings', 'update'],
+		'licenses.activate' => ['Detain\MyAdminFantastico\Activate', 'update'],
 		'ui.menu' => ['Detain\MyAdminFantastico\Menu', 'update']
 	],
 ];
