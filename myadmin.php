@@ -15,10 +15,10 @@ return [
 	'version' => '1.0.0',
 	'type' => 'licenses',
 	'hooks' => [
-		'function.requirements' => ['Detain\MyAdminFantastico\Requirements', 'update'],
-		'licenses.settings' => ['Detain\MyAdminFantastico\Settings', 'update'],
-		'licenses.activate' => ['Detain\MyAdminFantastico\Activate', 'update'],
-		'licenses.change_ip' => ['Detain\MyAdminFantastico\ChangeIp', 'update'],
-		'ui.menu' => ['Detain\MyAdminFantastico\Menu', 'update']
+		'function.requirements' => ['Detain\MyAdminFantastico\Plugin', 'Requirements'],
+		'licenses.settings' => ['Detain\MyAdminFantastico\Plugin', 'Settings'],
+		'licenses.activate' => ['Detain\MyAdminFantastico\Plugin', 'Activate'],
+		'licenses.change_ip' => ['Detain\MyAdminFantastico\Plugin', 'ChangeIp'],
+		'ui.menu' => ['Detain\MyAdminFantastico\Plugin', 'Menu']
 	],
 ];
