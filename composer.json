@@ -10,6 +10,9 @@
             "homepage": "https://my.interserver.net/"
         }
     ],
+    "config": {
+        "minimum-stability": "dev"
+    },
     "repositories": [
         {
             "type": "git",
