@@ -25,7 +25,7 @@
         "ext-soap": "*",
 	"symfony/event-dispatcher": "*",
 	"detain/myadmin-plugin-installer": "dev-master",
-	"detain/fantastico": "dev-master"
+	"detain/fantastico": "dev-master@dev"
     },
     "autoload": {
         "psr-4": {"Detain\\MyAdminFantastico\\": "src/"}
