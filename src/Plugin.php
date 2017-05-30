@@ -49,7 +49,7 @@ class Plugin {
 		if ($GLOBALS['tf']->ima == 'admin') {
 			$menu->add_link($module, 'choice=none.reusable_fantastico', 'icons/database_warning_48.png', 'ReUsable Fantastico Licenses');
 			$menu->add_link($module, 'choice=none.fantastico_list', 'icons/database_warning_48.png', 'Fantastico Licenses Breakdown');
-			$menu->add_link('licensesapi', 'choice=none.fantastico_licenses_list', 'whm/createacct.gif', 'List all Fantastico Licenses');
+			$menu->add_link($module.'api', 'choice=none.fantastico_licenses_list', 'whm/createacct.gif', 'List all Fantastico Licenses');
 		}
 	}
 
