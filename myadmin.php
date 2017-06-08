@@ -13,7 +13,7 @@ return [
 	'home' => 'https://github.com/detain/myadmin-fantastico-licensing',
 	'repo' => 'https://github.com/detain/myadmin-fantastico-licensing',
 	'version' => '1.0.0',
-	'type' => 'licenses',
+	'type' => 'service',
 	'hooks' => [
 		'function.requirements' => ['Detain\MyAdminFantastico\Plugin', 'Requirements'],
 		'licenses.settings' => ['Detain\MyAdminFantastico\Plugin', 'Settings'],
