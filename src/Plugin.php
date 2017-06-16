@@ -19,11 +19,11 @@ class Plugin {
 
 	public static function Hooks() {
 		return [
-			'function.requirements' => ['Detain\MyAdminFantastico\Plugin', 'Requirements'],
-			'licenses.settings' => ['Detain\MyAdminFantastico\Plugin', 'Settings'],
-			'licenses.activate' => ['Detain\MyAdminFantastico\Plugin', 'Activate'],
-			'licenses.change_ip' => ['Detain\MyAdminFantastico\Plugin', 'ChangeIp'],
-			'ui.menu' => ['Detain\MyAdminFantastico\Plugin', 'Menu'],
+			'function.requirements' => [__CLASS__, 'Requirements'],
+			'licenses.settings' => [__CLASS__, 'Settings'],
+			'licenses.activate' => [__CLASS__, 'Activate'],
+			'licenses.change_ip' => [__CLASS__, 'ChangeIp'],
+			'ui.menu' => [__CLASS__, 'Menu'],
 		];
 	}
 
