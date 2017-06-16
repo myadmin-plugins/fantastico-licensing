@@ -7,7 +7,24 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 class Plugin {
 
+	public static $name = 'Fantastico Licensing';
+	public static $description = 'Allows selling of Fantastico Server and VPS License Types.  More info at https://www.netenberg.com/fantastico.php';
+	public static $help = 'It provides more than one million end users the ability to quickly install dozens of the leading open source content management systems into their web space.  	Must have a pre-existing cPanel license with cPanelDirect to purchase a fantastico license. Allow 10 minutes for activation.';
+	public static $module = 'licenses';
+	public static $type = 'service';
+
+
 	public function __construct() {
+	}
+
+	public static function Hooks() {
+		return [
+			'function.requirements' => ['Detain\MyAdminFantastico\Plugin', 'Requirements'],
+			'licenses.settings' => ['Detain\MyAdminFantastico\Plugin', 'Settings'],
+			'licenses.activate' => ['Detain\MyAdminFantastico\Plugin', 'Activate'],
+			'licenses.change_ip' => ['Detain\MyAdminFantastico\Plugin', 'ChangeIp'],
+			'ui.menu' => ['Detain\MyAdminFantastico\Plugin', 'Menu'],
+		];
 	}
 
 	public static function Activate(GenericEvent $event) {
