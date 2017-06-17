@@ -17,15 +17,12 @@ use Detain\Fantastico\Fantastico;
  */
 function reusable_fantastico() {
 	page_title('ReUsable Fantastico Licenses');
-	//ini_set('display_errors', 'on');
-	//echo '<pre>';
 	if ($GLOBALS['tf']->ima == 'admin') {
 		$module = 'licenses';
 		$serviceTypes = run_event('get_service_types', false, $module);
 		$db = get_module_db($module);
 		$settings = get_module_settings($module);
 		$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
-		$ipdetails = get_fantastico_licenses();
 		$ips = $fantastico->getIpList(Fantastico::ALL_TYPES);
 		$frequency = 1;
 		if (isset($GLOBALS['tf']->variables->request['add']) && $GLOBALS['tf']->variables->request['add'] == 1) {

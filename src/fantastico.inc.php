@@ -15,7 +15,7 @@ use Detain\Fantastico\Fantastico;
  * get_fantastico_licenses()
  * simple wrapper to get all the fantastico licenses.
  *
- * @return array array of licenses. {@link Fantastico.getIpListDetailed}
+ * @return false|array array of licenses. {@link Fantastico.getIpListDetailed}
  */
 function get_fantastico_licenses() {
 	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
@@ -29,12 +29,12 @@ function get_fantastico_licenses() {
  */
 function get_fantastico_list() {
 	$category = SERVICE_TYPES_FANTASTICO;
-	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
 	$fantastico_ips = get_fantastico_licenses();
 	$ipdata = [];
-	// [ipAddress] => 194.116.187.120 [addedOn] => 2009-05-05 19:39:32 [isVPS] => No [status] => Active
+	// Has ipAddress with a string ip, addedOn with a string date mysql formatted date, isVPS which might be 'No', and status which might be 'Active'
 	foreach ($fantastico_ips as $idx => $data) {
-		$data['addedOn'] = array_shift(explode(' ', $data['addedOn']));
+		$data['addedOn'] = explode(' ', $data['addedOn']);
+		$data['addedOn'] = array_shift($data['addedOn']);
 		$ipdata[$data['ipAddress']] = array_merge($data, array(
 			'hostname' => '',
 			'billing_status' => '',
@@ -102,7 +102,6 @@ function get_available_fantastico($type) {
 	$db = get_module_db('licenses');
 	$settings = get_module_settings('licenses');
 	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
-	$ipdetails = get_fantastico_licenses();
 	$ips = $fantastico->getIpList(Fantastico::ALL_TYPES);
 	$db->query("select * from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='licenses' and services_category=".SERVICE_TYPES_FANTASTICO." and {$settings['PREFIX']}_status in ('canceled','expired')");
 	$found = false;
@@ -140,7 +139,6 @@ function activate_fantastico($ip, $type) {
 	$ipdetails = get_fantastico_licenses();
 	$ips = $fantastico->getIpList(Fantastico::ALL_TYPES);
 	$db->query("select * from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='licenses' and services_category=".SERVICE_TYPES_FANTASTICO." and {$settings['PREFIX']}_status in ('canceled','expired')");
-	$found = false;
 	// go through all canceled/expired ips
 	while ($db->next_record(MYSQL_ASSOC)) {
 		// check if ip is still licensed
@@ -149,13 +147,13 @@ function activate_fantastico($ip, $type) {
 			if ($type == 1) {
 				if ($result['isVPS'] == 'No') {
 					$result = $fantastico->editIp($db->Record['license_ip'], $ip);
-					myadmin_log('licenses', 'info', "Fantastico Re-Using IP {$db->Record['license_ip']} Type $type As $ip", __LINE__, __FILE__);
+					myadmin_log('licenses', 'info', "Fantastico Re-Using IP {$db->Record['license_ip']} Type $type As $ip result: ".myadmin_stringify($result, 'json'), __LINE__, __FILE__);
 					return true;
 				}
 			} else {
 				if ($result['isVPS'] == 'Yes') {
 					$result = $fantastico->editIp($db->Record['license_ip'], $ip);
-					myadmin_log('licenses', 'info', "Fantastico Re-Using IP {$db->Record['license_ip']} Type $type As $ip", __LINE__, __FILE__);
+					myadmin_log('licenses', 'info', "Fantastico Re-Using IP {$db->Record['license_ip']} Type $type As $ip result: ".myadmin_stringify($result, 'json'), __LINE__, __FILE__);
 					return true;
 				}
 			}
@@ -177,7 +175,6 @@ function get_reusable_fantastico() {
 	$db = get_module_db('licenses');
 	$settings = get_module_settings('licenses');
 	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
-	$ipdetails = get_fantastico_licenses();
 	$ips = $fantastico->getIpList(Fantastico::ALL_TYPES);
 	$query = "select {$settings['PREFIX']}_ip, {$settings['PREFIX']}_status from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='licenses' and services_category=".SERVICE_TYPES_FANTASTICO." and {$settings['PREFIX']}_ip in ('" . implode("','", $ips) . "') order by {$settings['PREFIX']}_status";
 	//echo $query;
