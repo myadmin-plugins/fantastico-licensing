@@ -21,7 +21,7 @@ function reusable_fantastico() {
 	//echo '<pre>';
 	if ($GLOBALS['tf']->ima == 'admin') {
 		$module = 'licenses';
-		$service_types = run_event('get_service_types', false, $module);
+		$serviceTypes = run_event('get_service_types', false, $module);
 		$db = get_module_db($module);
 		$settings = get_module_settings($module);
 		$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
@@ -38,7 +38,7 @@ function reusable_fantastico() {
 						$type = 5013;
 					else
 						$type = 5003;
-					$service_cost = $service_types[$type]['services_cost'];
+					$service_cost = $serviceTypes[$type]['services_cost'];
 					$db->query(make_insert_query($settings['TABLE'], array(
 						$settings['PREFIX'] . '_id' => null,
 						$settings['PREFIX'] . '_type' => $type,
