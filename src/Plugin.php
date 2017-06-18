@@ -20,7 +20,7 @@ class Plugin {
 	public static function getHooks() {
 		return [
 			'function.requirements' => [__CLASS__, 'Requirements'],
-			'licenses.settings' => [__CLASS__, 'Settings'],
+			'licenses.settings' => [__CLASS__, 'getSettings'],
 			'licenses.activate' => [__CLASS__, 'Activate'],
 			'licenses.change_ip' => [__CLASS__, 'ChangeIp'],
 			'ui.menu' => [__CLASS__, 'Menu'],
@@ -87,7 +87,7 @@ class Plugin {
 		$loader->add_requirement('vps_add_fantastico', '/vps/addons/vps_add_fantastico.php');
 	}
 
-	public static function Settings(GenericEvent $event) {
+	public static function getSettings(GenericEvent $event) {
 		// will be executed when the licenses.settings event is dispatched
 		$settings = $event->getSubject();
 		$settings->add_text_setting('licenses', 'Fantastico', 'fantastico_username', 'Fantastico Username:', 'Fantastico Username', $settings->get_setting('FANTASTICO_USERNAME'));
