@@ -26,11 +26,11 @@ function reusable_fantastico() {
 		$ips = $fantastico->getIpList(Fantastico::ALL_TYPES);
 		$frequency = 1;
 		if (isset($GLOBALS['tf']->variables->request['add']) && $GLOBALS['tf']->variables->request['add'] == 1) {
-			$ip = $db->real_escape($GLOBALS['tf']->variables->request['ip']);
-			if (in_array($ip, $ips)) {
-				$db->query("select * from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='{$module}' and services_category=".SERVICE_TYPES_FANTASTICO." and license_ip='{$ip}'", __LINE__, __FILE__);
+			$ipAddress = $db->real_escape($GLOBALS['tf']->variables->request['ip']);
+			if (in_array($ipAddress, $ips)) {
+				$db->query("select * from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='{$module}' and services_category=".SERVICE_TYPES_FANTASTICO." and license_ip='{$ipAddress}'", __LINE__, __FILE__);
 				if ($db->num_rows() == 0) {
-					$result = $fantastico->getIpDetails($ip);
+					$result = $fantastico->getIpDetails($ipAddress);
 					if ($result['isVPS'] == 'Yes')
 						$type = 5013;
 					else
@@ -43,7 +43,7 @@ function reusable_fantastico() {
 						$settings['PREFIX'] . '_cost' => $service_cost,
 						$settings['PREFIX'] . '_frequency' => $frequency,
 						$settings['PREFIX'] . '_order_date' => mysql_now(),
-						$settings['PREFIX'] . '_ip' => $ip,
+						$settings['PREFIX'] . '_ip' => $ipAddress,
 						$settings['PREFIX'] . '_status' => 'canceled',
 						$settings['PREFIX'] . '_invoice' => 0,
 						$settings['PREFIX'] . '_coupon' => 0,
@@ -51,7 +51,7 @@ function reusable_fantastico() {
 						$settings['PREFIX'] . '_hostname' => '',
 					)), __LINE__, __FILE__);
 				} else {
-					//var_dump($fantastico->getIpDetails($ip));
+					//var_dump($fantastico->getIpDetails($ipAddress));
 					dialog('Error', 'IP Already Licensed For Fantastico In Our DB');
 				}
 			} else {

@@ -60,9 +60,9 @@ and services_module='licenses'
 and license_ip in ('" . implode("','", $ips) . "')", __LINE__, __FILE__);
 		while ($db->next_record(MYSQL_ASSOC)) {
 			$db->Record['site'] = 'cPanelDirect';
-			$ip = $db->Record['license_ip'];
+			$ipAddress = $db->Record['license_ip'];
 			unset($db->Record['license_ip']);
-			$ipdata[$ip] = array_merge($ipdata[$ip], $db->Record);
+			$ipdata[$ipAddress] = array_merge($ipdata[$ipAddress], $db->Record);
 		}
 	}
 	if (isset($GLOBALS['modules']['vps'])) {
@@ -81,13 +81,13 @@ WHERE
 vps.vps_ip in ('" . implode("','", $ips) . "')", __LINE__, __FILE__);
 		while ($db->next_record(MYSQL_ASSOC)) {
 			$db->Record['site'] = 'Interserver VPS';
-			$ip = $db->Record['vps_ip'];
+			$ipAddress = $db->Record['vps_ip'];
 			unset($db->Record['vps_ip']);
-			$ipdata[$ip] = array_merge($ipdata[$ip], $db->Record);
+			$ipdata[$ipAddress] = array_merge($ipdata[$ipAddress], $db->Record);
 		}
 	}
 	$response = [];
-	foreach ($ipdata as $ip => $data) {
+	foreach ($ipdata as $ipAddress => $data) {
 		$response[] = $data;
 	}
 	return $response;
@@ -125,11 +125,11 @@ function get_available_fantastico($type) {
 
 /**
  * activate_fantastico()
- * @param mixed $ip
+ * @param mixed $ipAddress
  * @param mixed $type
  * @return bool
  */
-function activate_fantastico($ip, $type) {
+function activate_fantastico($ipAddress, $type) {
 	ini_set('max_execution_time', 1000); // just put a lot of time
 	ini_set('default_socket_timeout', 1000); // same
 	$db = get_module_db('licenses');
@@ -146,25 +146,25 @@ function activate_fantastico($ip, $type) {
 			$result = $fantastico->getIpDetails($db->Record['license_ip']);
 			if ($type == 1) {
 				if ($result['isVPS'] == 'No') {
-					$result = $fantastico->editIp($db->Record['license_ip'], $ip);
-					myadmin_log('licenses', 'info', "Fantastico Re-Using IP {$db->Record['license_ip']} Type $type As $ip result: ".myadmin_stringify($result, 'json'), __LINE__, __FILE__);
+					$result = $fantastico->editIp($db->Record['license_ip'], $ipAddress);
+					myadmin_log('licenses', 'info', "Fantastico Re-Using IP {$db->Record['license_ip']} Type $type As $ipAddress result: ".myadmin_stringify($result, 'json'), __LINE__, __FILE__);
 					return true;
 				}
 			} else {
 				if ($result['isVPS'] == 'Yes') {
-					$result = $fantastico->editIp($db->Record['license_ip'], $ip);
-					myadmin_log('licenses', 'info', "Fantastico Re-Using IP {$db->Record['license_ip']} Type $type As $ip result: ".myadmin_stringify($result, 'json'), __LINE__, __FILE__);
+					$result = $fantastico->editIp($db->Record['license_ip'], $ipAddress);
+					myadmin_log('licenses', 'info', "Fantastico Re-Using IP {$db->Record['license_ip']} Type $type As $ipAddress result: ".myadmin_stringify($result, 'json'), __LINE__, __FILE__);
 					return true;
 				}
 			}
 		}
 	}
-	$result = $fantastico->addIp($ip, $type);
+	$result = $fantastico->addIp($ipAddress, $type);
 	if (isset($result['faultcode'])) {
-		myadmin_log('licenses', 'error', 'Fantastico addIp($ip, $type) returned Fault '.$result['faultcode'].': '.$result['fault'], __LINE__, __FILE__);
+		myadmin_log('licenses', 'error', 'Fantastico addIp($ipAddress, $type) returned Fault '.$result['faultcode'].': '.$result['fault'], __LINE__, __FILE__);
 		return false;
 	}
-	myadmin_log('licenses', 'info', "Fantastico New License $ip Type $type Licensed ID {$result['id']}", __LINE__, __FILE__);
+	myadmin_log('licenses', 'info', "Fantastico New License $ipAddress Type $type Licensed ID {$result['id']}", __LINE__, __FILE__);
 	return true;
 }
 
