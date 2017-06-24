@@ -20,9 +20,9 @@ class Plugin {
 	public static function getHooks() {
 		return [
 			'function.requirements' => [__CLASS__, 'getRequirements'],
-			'licenses.settings' => [__CLASS__, 'getSettings'],
-			'licenses.activate' => [__CLASS__, 'getActivate'],
-			'licenses.change_ip' => [__CLASS__, 'ChangeIp'],
+			self::$module.'.settings' => [__CLASS__, 'getSettings'],
+			self::$module.'.activate' => [__CLASS__, 'getActivate'],
+			self::$module.'.change_ip' => [__CLASS__, 'ChangeIp'],
 			'ui.menu' => [__CLASS__, 'getMenu'],
 		];
 	}
@@ -30,7 +30,7 @@ class Plugin {
 	public static function getActivate(GenericEvent $event) {
 		$license = $event->getSubject();
 		if ($event['category'] == SERVICE_TYPES_FANTASTICO) {
-			myadmin_log('licenses', 'info', 'Fantastico Activation', __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', 'Fantastico Activation', __LINE__, __FILE__);
 			function_requirements('activate_fantastico');
 			activate_fantastico($license->get_ip(), $event['field1']);
 			$event->stopPropagation();
@@ -40,12 +40,12 @@ class Plugin {
 	public static function ChangeIp(GenericEvent $event) {
 		if ($event['category'] == SERVICE_TYPES_FANTASTICO) {
 			$license = $event->getSubject();
-			$settings = get_module_settings('licenses');
+			$settings = get_module_settings(self::$module);
 			$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
-			myadmin_log('licenses', 'info', "IP Change - (OLD:".$license->get_ip().") (NEW:{$event['newip']})", __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', "IP Change - (OLD:".$license->get_ip().") (NEW:{$event['newip']})", __LINE__, __FILE__);
 			$result = $fantastico->editIp($license->get_ip(), $event['newip']);
 			if (isset($result['faultcode'])) {
-				myadmin_log('licenses', 'error', 'Fantastico editIp('.$license->get_ip().', '.$event['newip'].') returned Fault '.$result['faultcode'].': '.$result['fault'], __LINE__, __FILE__);
+				myadmin_log(self::$module, 'error', 'Fantastico editIp('.$license->get_ip().', '.$event['newip'].') returned Fault '.$result['faultcode'].': '.$result['fault'], __LINE__, __FILE__);
 				$event['status'] = 'error';
 				$event['status_text'] = 'Error Code '.$result['faultcode'].': '.$result['fault'];
 			} else {
@@ -60,11 +60,10 @@ class Plugin {
 
 	public static function getMenu(GenericEvent $event) {
 		$menu = $event->getSubject();
-		$module = 'licenses';
 		if ($GLOBALS['tf']->ima == 'admin') {
-			$menu->add_link($module, 'choice=none.reusable_fantastico', 'icons/database_warning_48.png', 'ReUsable Fantastico Licenses');
-			$menu->add_link($module, 'choice=none.fantastico_list', 'icons/database_warning_48.png', 'Fantastico Licenses Breakdown');
-			$menu->add_link($module.'api', 'choice=none.fantastico_licenses_list', 'whm/createacct.gif', 'List all Fantastico Licenses');
+			$menu->add_link(self::$module, 'choice=none.reusable_fantastico', 'icons/database_warning_48.png', 'ReUsable Fantastico Licenses');
+			$menu->add_link(self::$module, 'choice=none.fantastico_list', 'icons/database_warning_48.png', 'Fantastico Licenses Breakdown');
+			$menu->add_link(self::$module.'api', 'choice=none.fantastico_licenses_list', 'whm/createacct.gif', 'List all Fantastico Licenses');
 		}
 	}
 
@@ -86,9 +85,9 @@ class Plugin {
 
 	public static function getSettings(GenericEvent $event) {
 		$settings = $event->getSubject();
-		$settings->add_text_setting('licenses', 'Fantastico', 'fantastico_username', 'Fantastico Username:', 'Fantastico Username', $settings->get_setting('FANTASTICO_USERNAME'));
-		$settings->add_text_setting('licenses', 'Fantastico', 'fantastico_password', 'Fantastico Password:', 'Fantastico Password', $settings->get_setting('FANTASTICO_PASSWORD'));
-		$settings->add_dropdown_setting('licenses', 'Fantastico', 'outofstock_licenses_fantastico', 'Out Of Stock Fantastico Licenses', 'Enable/Disable Sales Of This Type', $settings->get_setting('OUTOFSTOCK_LICENSES_FANTASTICO'), array('0', '1'), array('No', 'Yes', ));
+		$settings->add_text_setting(self::$module, 'Fantastico', 'fantastico_username', 'Fantastico Username:', 'Fantastico Username', $settings->get_setting('FANTASTICO_USERNAME'));
+		$settings->add_text_setting(self::$module, 'Fantastico', 'fantastico_password', 'Fantastico Password:', 'Fantastico Password', $settings->get_setting('FANTASTICO_PASSWORD'));
+		$settings->add_dropdown_setting(self::$module, 'Fantastico', 'outofstock_licenses_fantastico', 'Out Of Stock Fantastico Licenses', 'Enable/Disable Sales Of This Type', $settings->get_setting('OUTOFSTOCK_LICENSES_FANTASTICO'), array('0', '1'), array('No', 'Yes', ));
 	}
 
 }
