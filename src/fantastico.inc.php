@@ -19,9 +19,9 @@ use Detain\Fantastico\Fantastico;
  */
 function get_fantastico_licenses() {
 	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
-	$fantastico_ips = $fantastico->getIpListDetailed(Fantastico::ALL_TYPES);
-	request_log('licenses', false, __FUNCTION__, 'fantastico', 'getIpListDetailed', 'Fantastico::ALL_TYPES', $fantastico_ips);
-	return $fantastico_ips;
+	$fantasticoIps = $fantastico->getIpListDetailed(Fantastico::ALL_TYPES);
+	request_log('licenses', false, __FUNCTION__, 'fantastico', 'getIpListDetailed', 'Fantastico::ALL_TYPES', $fantasticoIps);
+	return $fantasticoIps;
 }
 
 /**
@@ -29,10 +29,10 @@ function get_fantastico_licenses() {
  */
 function get_fantastico_list() {
 	$category = SERVICE_TYPES_FANTASTICO;
-	$fantastico_ips = get_fantastico_licenses();
+	$fantasticoIps = get_fantastico_licenses();
 	$ipdata = [];
 	// Has ipAddress with a string ip, addedOn with a string date mysql formatted date, isVPS which might be 'No', and status which might be 'Active'
-	foreach ($fantastico_ips as $idx => $data) {
+	foreach ($fantasticoIps as $idx => $data) {
 		$data['addedOn'] = explode(' ', $data['addedOn']);
 		$data['addedOn'] = array_shift($data['addedOn']);
 		$ipdata[$data['ipAddress']] = array_merge($data, array(

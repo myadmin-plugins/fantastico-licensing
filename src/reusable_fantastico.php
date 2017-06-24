@@ -35,12 +35,12 @@ function reusable_fantastico() {
 						$type = 5013;
 					else
 						$type = 5003;
-					$service_cost = $serviceTypes[$type]['services_cost'];
+					$serviceCost = $serviceTypes[$type]['services_cost'];
 					$db->query(make_insert_query($settings['TABLE'], array(
 						$settings['PREFIX'] . '_id' => null,
 						$settings['PREFIX'] . '_type' => $type,
 						$settings['PREFIX'] . '_custid' => 8,
-						$settings['PREFIX'] . '_cost' => $service_cost,
+						$settings['PREFIX'] . '_cost' => $serviceCost,
 						$settings['PREFIX'] . '_frequency' => $frequency,
 						$settings['PREFIX'] . '_order_date' => mysql_now(),
 						$settings['PREFIX'] . '_ip' => $ipAddress,
