@@ -182,10 +182,10 @@ function get_reusable_fantastico() {
 	$rows = [];
 	$activeips = [];
 	while ($db->next_record(MYSQL_ASSOC)) {
-		if ($db->Record[$settings['PREFIX'] . '_status'] == 'active') {
-			$activeips[] = $db->Record[$settings['PREFIX'] . '_ip'];
-		} elseif (!in_array($db->Record[$settings['PREFIX'] . '_ip'], $activeips)) {
-			$rows[] = $fantastico->getIpDetails($db->Record[$settings['PREFIX'] . '_ip']);
+		if ($db->Record[$settings['PREFIX'].'_status'] == 'active') {
+			$activeips[] = $db->Record[$settings['PREFIX'].'_ip'];
+		} elseif (!in_array($db->Record[$settings['PREFIX'].'_ip'], $activeips)) {
+			$rows[] = $fantastico->getIpDetails($db->Record[$settings['PREFIX'].'_ip']);
 		}
 	}
 	return $rows;
