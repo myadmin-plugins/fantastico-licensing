@@ -15,7 +15,7 @@ function fantastico_licenses_list() {
 	if ($GLOBALS['tf']->ima == 'admin') {
 		$table = new TFTable;
 		$table->set_title('Fantastico License List');
-		$header = false;
+		$header = FALSE;
 		$licenses = get_fantastico_licenses();
 		foreach ($licenses as $lid => $data) {
 			if (!$header) {
@@ -23,7 +23,7 @@ function fantastico_licenses_list() {
 					$table->add_field(ucwords(str_replace('_', ' ', $field)));
 				}
 				$table->add_row();
-				$header = true;
+				$header = TRUE;
 			}
 			foreach ($data as $key => $field) {
 				$table->add_field($field);

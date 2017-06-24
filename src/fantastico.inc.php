@@ -15,12 +15,12 @@ use Detain\Fantastico\Fantastico;
  * get_fantastico_licenses()
  * simple wrapper to get all the fantastico licenses.
  *
- * @return false|array array of licenses. {@link Fantastico.getIpListDetailed}
+ * @return FALSE|array array of licenses. {@link Fantastico.getIpListDetailed}
  */
 function get_fantastico_licenses() {
 	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
 	$fantasticoIps = $fantastico->getIpListDetailed(Fantastico::ALL_TYPES);
-	request_log('licenses', false, __FUNCTION__, 'fantastico', 'getIpListDetailed', 'Fantastico::ALL_TYPES', $fantasticoIps);
+	request_log('licenses', FALSE, __FUNCTION__, 'fantastico', 'getIpListDetailed', 'Fantastico::ALL_TYPES', $fantasticoIps);
 	return $fantasticoIps;
 }
 
@@ -104,7 +104,7 @@ function get_available_fantastico($type) {
 	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
 	$ips = $fantastico->getIpList(Fantastico::ALL_TYPES);
 	$db->query("select * from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='licenses' and services_category=".SERVICE_TYPES_FANTASTICO." and {$settings['PREFIX']}_status in ('canceled','expired')");
-	$found = false;
+	$found = FALSE;
 	// go through all canceled/expired ips
 	while ($db->next_record(MYSQL_ASSOC)) {
 		// check if ip is still licensed
@@ -148,13 +148,13 @@ function activate_fantastico($ipAddress, $type) {
 				if ($result['isVPS'] == 'No') {
 					$result = $fantastico->editIp($db->Record['license_ip'], $ipAddress);
 					myadmin_log('licenses', 'info', "Fantastico Re-Using IP {$db->Record['license_ip']} Type $type As $ipAddress result: ".myadmin_stringify($result, 'json'), __LINE__, __FILE__);
-					return true;
+					return TRUE;
 				}
 			} else {
 				if ($result['isVPS'] == 'Yes') {
 					$result = $fantastico->editIp($db->Record['license_ip'], $ipAddress);
 					myadmin_log('licenses', 'info', "Fantastico Re-Using IP {$db->Record['license_ip']} Type $type As $ipAddress result: ".myadmin_stringify($result, 'json'), __LINE__, __FILE__);
-					return true;
+					return TRUE;
 				}
 			}
 		}
@@ -162,10 +162,10 @@ function activate_fantastico($ipAddress, $type) {
 	$result = $fantastico->addIp($ipAddress, $type);
 	if (isset($result['faultcode'])) {
 		myadmin_log('licenses', 'error', 'Fantastico addIp($ipAddress, $type) returned Fault '.$result['faultcode'].': '.$result['fault'], __LINE__, __FILE__);
-		return false;
+		return FALSE;
 	}
 	myadmin_log('licenses', 'info', "Fantastico New License $ipAddress Type $type Licensed ID {$result['id']}", __LINE__, __FILE__);
-	return true;
+	return TRUE;
 }
 
 /**
