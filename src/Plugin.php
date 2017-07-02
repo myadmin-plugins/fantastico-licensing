@@ -29,29 +29,29 @@ class Plugin {
 	}
 
 	public static function getActivate(GenericEvent $event) {
-		$license = $event->getSubject();
+		$serviceClass = $event->getSubject();
 		if ($event['category'] == SERVICE_TYPES_FANTASTICO) {
 			myadmin_log(self::$module, 'info', 'Fantastico Activation', __LINE__, __FILE__);
 			function_requirements('activate_fantastico');
-			activate_fantastico($license->get_ip(), $event['field1']);
+			activate_fantastico($serviceClass->get_ip(), $event['field1']);
 			$event->stopPropagation();
 		}
 	}
 
 	public static function getChangeIp(GenericEvent $event) {
 		if ($event['category'] == SERVICE_TYPES_FANTASTICO) {
-			$license = $event->getSubject();
+			$serviceClass = $event->getSubject();
 			$settings = get_module_settings(self::$module);
 			$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
-			myadmin_log(self::$module, 'info', "IP Change - (OLD:".$license->get_ip().") (NEW:{$event['newip']})", __LINE__, __FILE__);
-			$result = $fantastico->editIp($license->get_ip(), $event['newip']);
+			myadmin_log(self::$module, 'info', "IP Change - (OLD:".$serviceClass->get_ip().") (NEW:{$event['newip']})", __LINE__, __FILE__);
+			$result = $fantastico->editIp($serviceClass->get_ip(), $event['newip']);
 			if (isset($result['faultcode'])) {
-				myadmin_log(self::$module, 'error', 'Fantastico editIp('.$license->get_ip().', '.$event['newip'].') returned Fault '.$result['faultcode'].': '.$result['fault'], __LINE__, __FILE__);
+				myadmin_log(self::$module, 'error', 'Fantastico editIp('.$serviceClass->get_ip().', '.$event['newip'].') returned Fault '.$result['faultcode'].': '.$result['fault'], __LINE__, __FILE__);
 				$event['status'] = 'error';
 				$event['status_text'] = 'Error Code '.$result['faultcode'].': '.$result['fault'];
 			} else {
-				$GLOBALS['tf']->history->add($settings['TABLE'], 'change_ip', $event['newip'], $license->get_ip());
-				$license->set_ip($event['newip'])->save();
+				$GLOBALS['tf']->history->add($settings['TABLE'], 'change_ip', $event['newip'], $serviceClass->get_ip());
+				$serviceClass->set_ip($event['newip'])->save();
 				$event['status'] = 'ok';
 				$event['status_text'] = 'The IP Address has been changed.';
 			}
