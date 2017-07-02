@@ -32,7 +32,8 @@ function get_fantastico_list() {
 	$fantasticoIps = get_fantastico_licenses();
 	$ipdata = [];
 	// Has ipAddress with a string ip, addedOn with a string date mysql formatted date, isVPS which might be 'No', and status which might be 'Active'
-	foreach ($fantasticoIps as $idx => $data) {
+	$ipValues = array_values($fantasticoIps);
+	foreach ($ipValues as $data) {
 		$data['addedOn'] = explode(' ', $data['addedOn']);
 		$data['addedOn'] = array_shift($data['addedOn']);
 		$ipdata[$data['ipAddress']] = array_merge($data, array(
@@ -104,7 +105,6 @@ function get_available_fantastico($type) {
 	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
 	$ips = $fantastico->getIpList(Fantastico::ALL_TYPES);
 	$db->query("select * from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='licenses' and services_category=".SERVICE_TYPES_FANTASTICO." and {$settings['PREFIX']}_status in ('canceled','expired')");
-	$found = FALSE;
 	// go through all canceled/expired ips
 	while ($db->next_record(MYSQL_ASSOC)) {
 		// check if ip is still licensed
@@ -136,7 +136,7 @@ function activate_fantastico($ipAddress, $type) {
 	$settings = get_module_settings('licenses');
 	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
 	// this is done first because it caches the getIpList() and getIpDetails() responses so they're faster as it loads all the data from 1 command
-	$ipdetails = get_fantastico_licenses();
+	get_fantastico_licenses();
 	$ips = $fantastico->getIpList(Fantastico::ALL_TYPES);
 	$db->query("select * from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='licenses' and services_category=".SERVICE_TYPES_FANTASTICO." and {$settings['PREFIX']}_status in ('canceled','expired')");
 	// go through all canceled/expired ips

@@ -17,15 +17,18 @@ function fantastico_licenses_list() {
 		$table->set_title('Fantastico License List');
 		$header = FALSE;
 		$licenses = get_fantastico_licenses();
-		foreach ($licenses as $lid => $data) {
+		$licensesValues = array_values($licenses);
+		foreach ($licensesValues as $data) {
 			if (!$header) {
-				foreach (array_keys($data) as $field) {
+				$dataKeys = array_keys($data);
+				foreach ($dataKeys as $field) {
 					$table->add_field(ucwords(str_replace('_', ' ', $field)));
 				}
 				$table->add_row();
 				$header = TRUE;
 			}
-			foreach ($data as $key => $field) {
+			$dataValues = array_values($data);
+			foreach ($dataValues as $field)
 				$table->add_field($field);
 			}
 			$table->add_row();
