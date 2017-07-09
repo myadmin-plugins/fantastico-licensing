@@ -57,7 +57,7 @@ ON licenses.license_custid = accounts.account_id
 WHERE
 services.services_category = {$category}
 and services_module='licenses'
-and license_ip in ('" . implode("','", $ips) . "')", __LINE__, __FILE__);
+and license_ip in ('".implode("','", $ips)."')", __LINE__, __FILE__);
 		while ($db->next_record(MYSQL_ASSOC)) {
 			$db->Record['site'] = 'cPanelDirect';
 			$ipAddress = $db->Record['license_ip'];
@@ -78,7 +78,7 @@ ON concat('Fantastico for VPS ', vps.vps_id) = repeat_invoices.repeat_invoices_d
 INNER JOIN accounts
 ON vps.vps_custid = accounts.account_id
 WHERE
-vps.vps_ip in ('" . implode("','", $ips) . "')", __LINE__, __FILE__);
+vps.vps_ip in ('" . implode("','", $ips)."')", __LINE__, __FILE__);
 		while ($db->next_record(MYSQL_ASSOC)) {
 			$db->Record['site'] = 'Interserver VPS';
 			$ipAddress = $db->Record['vps_ip'];
@@ -175,7 +175,7 @@ function get_reusable_fantastico() {
 	$settings = get_module_settings('licenses');
 	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
 	$ips = $fantastico->getIpList(Fantastico::ALL_TYPES);
-	$query = "select {$settings['PREFIX']}_ip, {$settings['PREFIX']}_status from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='licenses' and services_category=".SERVICE_TYPES_FANTASTICO." and {$settings['PREFIX']}_ip in ('" . implode("','", $ips) . "') order by {$settings['PREFIX']}_status";
+	$query = "select {$settings['PREFIX']}_ip, {$settings['PREFIX']}_status from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='licenses' and services_category=".SERVICE_TYPES_FANTASTICO." and {$settings['PREFIX']}_ip in ('".implode("','", $ips)."') order by {$settings['PREFIX']}_status";
 	//echo $query;
 	$db->query($query, __LINE__, __FILE__);
 	$rows = [];
