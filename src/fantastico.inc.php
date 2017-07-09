@@ -78,7 +78,7 @@ ON concat('Fantastico for VPS ', vps.vps_id) = repeat_invoices.repeat_invoices_d
 INNER JOIN accounts
 ON vps.vps_custid = accounts.account_id
 WHERE
-vps.vps_ip in ('" . implode("','", $ips)."')", __LINE__, __FILE__);
+vps.vps_ip in ('".implode("','", $ips)."')", __LINE__, __FILE__);
 		while ($db->next_record(MYSQL_ASSOC)) {
 			$db->Record['site'] = 'Interserver VPS';
 			$ipAddress = $db->Record['vps_ip'];
