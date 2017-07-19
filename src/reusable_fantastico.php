@@ -27,7 +27,7 @@ function reusable_fantastico() {
 		if (isset($GLOBALS['tf']->variables->request['add']) && $GLOBALS['tf']->variables->request['add'] == 1) {
 			$ipAddress = $db->real_escape($GLOBALS['tf']->variables->request['ip']);
 			if (in_array($ipAddress, $ips)) {
-				$db->query("select * from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='{$module}' and services_category=".SERVICE_TYPES_FANTASTICO." and license_ip='{$ipAddress}'", __LINE__, __FILE__);
+				$db->query("select * from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='{$module}' and services_category=".get_service_define('FANTASTICO')." and license_ip='{$ipAddress}'", __LINE__, __FILE__);
 				if ($db->num_rows() == 0) {
 					$result = $fantastico->getIpDetails($ipAddress);
 					if ($result['isVPS'] == 'Yes')

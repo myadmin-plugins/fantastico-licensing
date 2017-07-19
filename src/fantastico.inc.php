@@ -103,7 +103,7 @@ function get_available_fantastico($type) {
 	$settings = get_module_settings('licenses');
 	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
 	$ips = $fantastico->getIpList(Fantastico::ALL_TYPES);
-	$db->query("select * from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='licenses' and services_category=".SERVICE_TYPES_FANTASTICO." and {$settings['PREFIX']}_status in ('canceled','expired')");
+	$db->query("select * from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='licenses' and services_category=".get_service_define('FANTASTICO')." and {$settings['PREFIX']}_status in ('canceled','expired')");
 	// go through all canceled/expired ips
 	while ($db->next_record(MYSQL_ASSOC)) {
 		// check if ip is still licensed
@@ -137,7 +137,7 @@ function activate_fantastico($ipAddress, $type) {
 	// this is done first because it caches the getIpList() and getIpDetails() responses so they're faster as it loads all the data from 1 command
 	get_fantastico_licenses();
 	$ips = $fantastico->getIpList(Fantastico::ALL_TYPES);
-	$db->query("select * from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='licenses' and services_category=".SERVICE_TYPES_FANTASTICO." and {$settings['PREFIX']}_status in ('canceled','expired')");
+	$db->query("select * from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='licenses' and services_category=".get_service_define('FANTASTICO')." and {$settings['PREFIX']}_status in ('canceled','expired')");
 	// go through all canceled/expired ips
 	while ($db->next_record(MYSQL_ASSOC)) {
 		// check if ip is still licensed
@@ -175,7 +175,7 @@ function get_reusable_fantastico() {
 	$settings = get_module_settings('licenses');
 	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
 	$ips = $fantastico->getIpList(Fantastico::ALL_TYPES);
-	$query = "select {$settings['PREFIX']}_ip, {$settings['PREFIX']}_status from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='licenses' and services_category=".SERVICE_TYPES_FANTASTICO." and {$settings['PREFIX']}_ip in ('".implode("','", $ips)."') order by {$settings['PREFIX']}_status";
+	$query = "select {$settings['PREFIX']}_ip, {$settings['PREFIX']}_status from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='licenses' and services_category=".get_service_define('FANTASTICO')." and {$settings['PREFIX']}_ip in ('".implode("','", $ips)."') order by {$settings['PREFIX']}_status";
 	//echo $query;
 	$db->query($query, __LINE__, __FILE__);
 	$rows = [];
