@@ -30,7 +30,7 @@ class Plugin {
 
 	public static function getActivate(GenericEvent $event) {
 		$serviceClass = $event->getSubject();
-		if ($event['category'] == SERVICE_TYPES_FANTASTICO) {
+		if ($event['category'] == get_service_define('FANTASTICO')) {
 			myadmin_log(self::$module, 'info', 'Fantastico Activation', __LINE__, __FILE__);
 			function_requirements('activate_fantastico');
 			activate_fantastico($serviceClass->getIp(), $event['field1']);
@@ -39,7 +39,7 @@ class Plugin {
 	}
 
 	public static function getChangeIp(GenericEvent $event) {
-		if ($event['category'] == SERVICE_TYPES_FANTASTICO) {
+		if ($event['category'] == get_service_define('FANTASTICO')) {
 			$serviceClass = $event->getSubject();
 			$settings = get_module_settings(self::$module);
 			$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);

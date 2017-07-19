@@ -27,7 +27,7 @@ function get_fantastico_licenses() {
  * @return array
  */
 function get_fantastico_list() {
-	$category = SERVICE_TYPES_FANTASTICO;
+	$category = get_service_define('FANTASTICO');
 	$fantasticoIps = get_fantastico_licenses();
 	$ipdata = [];
 	// Has ipAddress with a string ip, addedOn with a string date mysql formatted date, isVPS which might be 'No', and status which might be 'Active'
