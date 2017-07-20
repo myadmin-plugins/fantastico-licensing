@@ -35,11 +35,13 @@ function get_fantastico_list() {
 	foreach ($ipValues as $data) {
 		$data['addedOn'] = explode(' ', $data['addedOn']);
 		$data['addedOn'] = array_shift($data['addedOn']);
-		$ipdata[$data['ipAddress']] = array_merge($data, array(
+		$ipdata[$data['ipAddress']] = array_merge($data, [
 			'hostname' => '',
 			'billing_status' => '',
 			'account_lid' => '',
-			'site' => ''));
+			'site' => ''
+		]
+		);
 	}
 	$ips = array_keys($ipdata);
 	if (isset($GLOBALS['modules']['licenses'])) {
