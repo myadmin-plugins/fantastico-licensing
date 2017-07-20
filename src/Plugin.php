@@ -34,7 +34,7 @@ class Plugin {
 			self::$module.'.activate' => [__CLASS__, 'getActivate'],
 			self::$module.'.reactivate' => [__CLASS__, 'getActivate'],
 			self::$module.'.change_ip' => [__CLASS__, 'getChangeIp'],
-			'ui.menu' => [__CLASS__, 'getMenu'],
+			'ui.menu' => [__CLASS__, 'getMenu']
 		];
 	}
 

@@ -47,8 +47,8 @@ function reusable_fantastico() {
 						$settings['PREFIX'].'_invoice' => 0,
 						$settings['PREFIX'].'_coupon' => 0,
 						$settings['PREFIX'].'_extra' => '',
-						$settings['PREFIX'].'_hostname' => '',
-					]
+						$settings['PREFIX'].'_hostname' => ''
+					                                               ]
 					           ), __LINE__, __FILE__);
 				} else {
 					//var_dump($fantastico->getIpDetails($ipAddress));
