@@ -48,8 +48,8 @@ function reusable_fantastico() {
 						$settings['PREFIX'].'_coupon' => 0,
 						$settings['PREFIX'].'_extra' => '',
 						$settings['PREFIX'].'_hostname' => ''
-					                                               ]
-					           ), __LINE__, __FILE__);
+																   ]
+							   ), __LINE__, __FILE__);
 				} else {
 					//var_dump($fantastico->getIpDetails($ipAddress));
 					dialog('Error', 'IP Already Licensed For Fantastico In Our DB');
