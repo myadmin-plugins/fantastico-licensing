@@ -12,7 +12,10 @@ use Detain\Fantastico\Fantastico;
 
 /**
  * reusable_fantastico()
+ *
  * @return void
+ * @throws \Exception
+ * @throws \SmartyException
  */
 function reusable_fantastico() {
 	page_title('ReUsable Fantastico Licenses');
