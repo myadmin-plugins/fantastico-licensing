@@ -62,7 +62,7 @@ function reusable_fantastico() {
 			}
 		}
 		add_output('<h3>Re-Usable Fantastico Licenses</h3>');
-		$table = new TFTable;
+		$table = new \TFTable;
 		$table->add_hidden('add', 1);
 		$table->set_title('Add ReUsable Fantastico IP');
 		$table->add_field('Re-Usable IP');

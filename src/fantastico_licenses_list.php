@@ -12,7 +12,7 @@ use Detain\Fantastico\Fantastico;
 
 function fantastico_licenses_list() {
 	if ($GLOBALS['tf']->ima == 'admin') {
-		$table = new TFTable;
+		$table = new \TFTable;
 		$table->set_title('Fantastico License List');
 		$header = FALSE;
 		$licenses = get_fantastico_licenses();
