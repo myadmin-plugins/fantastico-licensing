@@ -22,7 +22,7 @@ function reusable_fantastico() {
 		$module = 'licenses';
 		$serviceTypes = run_event('get_service_types', FALSE, $module);
 		$db = get_module_db($module);
-		$settings = get_module_settings($module);
+		$settings = \get_module_settings($module);
 		$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
 		$ips = $fantastico->getIpList(Fantastico::ALL_TYPES);
 		$frequency = 1;

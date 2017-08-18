@@ -101,7 +101,7 @@ vps.vps_ip in ('".implode("','", $ips)."')", __LINE__, __FILE__);
  */
 function get_available_fantastico($type) {
 	$db = get_module_db('licenses');
-	$settings = get_module_settings('licenses');
+	$settings = \get_module_settings('licenses');
 	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
 	$ips = $fantastico->getIpList(Fantastico::ALL_TYPES);
 	$db->query("select * from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='licenses' and services_category=".get_service_define('FANTASTICO')." and {$settings['PREFIX']}_status in ('canceled','expired')");
@@ -133,7 +133,7 @@ function activate_fantastico($ipAddress, $type) {
 	ini_set('max_execution_time', 1000); // just put a lot of time
 	ini_set('default_socket_timeout', 1000); // same
 	$db = get_module_db('licenses');
-	$settings = get_module_settings('licenses');
+	$settings = \get_module_settings('licenses');
 	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
 	// this is done first because it caches the getIpList() and getIpDetails() responses so they're faster as it loads all the data from 1 command
 	get_fantastico_licenses();
@@ -173,7 +173,7 @@ function activate_fantastico($ipAddress, $type) {
  */
 function get_reusable_fantastico() {
 	$db = get_module_db('licenses');
-	$settings = get_module_settings('licenses');
+	$settings = \get_module_settings('licenses');
 	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
 	$ips = $fantastico->getIpList(Fantastico::ALL_TYPES);
 	$query = "select {$settings['PREFIX']}_ip, {$settings['PREFIX']}_status from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='licenses' and services_category=".get_service_define('FANTASTICO')." and {$settings['PREFIX']}_ip in ('".implode("','", $ips)."') order by {$settings['PREFIX']}_status";
