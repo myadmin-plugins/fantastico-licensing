@@ -92,8 +92,8 @@ class Plugin {
 	 */
 	public static function getRequirements(GenericEvent $event) {
 		$loader = $event->getSubject();
-		$loader->add_requirement('crud_fantastico_list', '/../vendor/detain/crud/src/crud/crud_fantastico_list.php');
-		$loader->add_requirement('crud_reusable_fantastico', '/../vendor/detain/crud/src/crud/crud_reusable_fantastico.php');
+		$loader->add_page_requirement('crud_fantastico_list', '/../vendor/detain/crud/src/crud/crud_fantastico_list.php');
+		$loader->add_page_requirement('crud_reusable_fantastico', '/../vendor/detain/crud/src/crud/crud_reusable_fantastico.php');
 		$loader->add_requirement('get_fantastico_licenses', '/../vendor/detain/myadmin-fantastico-licensing/src/fantastico.inc.php');
 		$loader->add_requirement('get_fantastico_list', '/../vendor/detain/myadmin-fantastico-licensing/src/fantastico.inc.php');
 		$loader->add_page_requirement('fantastico_licenses_list', '/../vendor/detain/myadmin-fantastico-licensing/src/fantastico_licenses_list.php');
