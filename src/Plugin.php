@@ -102,7 +102,7 @@ class Plugin {
 		$loader->add_requirement('activate_fantastico', '/../vendor/detain/myadmin-fantastico-licensing/src/fantastico.inc.php');
 		$loader->add_requirement('get_reusable_fantastico', '/../vendor/detain/myadmin-fantastico-licensing/src/fantastico.inc.php');
 		$loader->add_page_requirement('reusable_fantastico', '/../vendor/detain/myadmin-fantastico-licensing/src/reusable_fantastico.php');
-		$loader->add_requirement('class.Fantastico', '/../vendor/detain/fantastico-licensing/src/Fantastico.php');
+		$loader->add_requirement('class.Fantastico', '/../vendor/detain/fantastico-licensing/src/Fantastico.php', '\\Detain\\Fantastico\\');
 		$loader->add_page_requirement('vps_add_fantastico', '/vps/addons/vps_add_fantastico.php');
 	}
 
