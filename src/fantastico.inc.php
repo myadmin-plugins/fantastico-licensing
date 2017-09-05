@@ -88,9 +88,8 @@ vps.vps_ip in ('".implode("','", $ips)."')", __LINE__, __FILE__);
 		}
 	}
 	$response = [];
-	foreach ($ipdata as $ipAddress => $data) {
+	foreach ($ipdata as $ipAddress => $data)
 		$response[] = $data;
-	}
 	return $response;
 }
 
@@ -111,13 +110,11 @@ function get_available_fantastico($type) {
 		if (in_array($db->Record['license_ip'], $ips)) {
 			$result = $fantastico->getIpDetails($db->Record['license_ip']);
 			if ($type == 1) {
-				if ($result['isVPS'] == 'No') {
+				if ($result['isVPS'] == 'No')
 					echo "Found Reusable Dedicated Server Fantastico License On IP {$db->Record['license_ip']}\n";
-				}
 			} else {
-				if ($result['isVPS'] == 'Yes') {
+				if ($result['isVPS'] == 'Yes')
 					echo "Found Reusable VPS Fantastico License On IP {$db->Record['license_ip']}\n";
-				}
 			}
 		}
 	}
