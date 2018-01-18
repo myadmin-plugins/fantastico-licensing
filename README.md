@@ -24,5 +24,5 @@ composer require detain/myadmin-fantastico-licensing
 
 ## License
 
-The Fantastico Licensing Class class is licensed under the LGPL-v2 license.
+The Fantastico Licensing Class class is licensed under the LGPL-v2.1 license.
 
