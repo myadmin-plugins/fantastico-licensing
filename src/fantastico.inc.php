@@ -15,17 +15,19 @@ use Detain\Fantastico\Fantastico;
  *
  * @return FALSE|array array of licenses. {@link Fantastico.getIpListDetailed}
  */
-function get_fantastico_licenses() {
+function get_fantastico_licenses()
+{
 	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
 	$fantasticoIps = $fantastico->getIpListDetailed(Fantastico::ALL_TYPES);
-	request_log('licenses', FALSE, __FUNCTION__, 'fantastico', 'getIpListDetailed', 'Fantastico::ALL_TYPES', $fantasticoIps);
+	request_log('licenses', false, __FUNCTION__, 'fantastico', 'getIpListDetailed', 'Fantastico::ALL_TYPES', $fantasticoIps);
 	return $fantasticoIps;
 }
 
 /**
  * @return array
  */
-function get_fantastico_list() {
+function get_fantastico_list()
+{
 	$category = get_service_define('FANTASTICO');
 	$fantasticoIps = get_fantastico_licenses();
 	$ipdata = [];
@@ -88,8 +90,9 @@ vps.vps_ip in ('".implode("','", $ips)."')", __LINE__, __FILE__);
 		}
 	}
 	$response = [];
-	foreach ($ipdata as $ipAddress => $data)
+	foreach ($ipdata as $ipAddress => $data) {
 		$response[] = $data;
+	}
 	return $response;
 }
 
@@ -98,7 +101,8 @@ vps.vps_ip in ('".implode("','", $ips)."')", __LINE__, __FILE__);
  * @param mixed $type
  * @return void
  */
-function get_available_fantastico($type) {
+function get_available_fantastico($type)
+{
 	$db = get_module_db('licenses');
 	$settings = \get_module_settings('licenses');
 	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
@@ -110,11 +114,13 @@ function get_available_fantastico($type) {
 		if (in_array($db->Record['license_ip'], $ips)) {
 			$result = $fantastico->getIpDetails($db->Record['license_ip']);
 			if ($type == 1) {
-				if ($result['isVPS'] == 'No')
+				if ($result['isVPS'] == 'No') {
 					echo "Found Reusable Dedicated Server Fantastico License On IP {$db->Record['license_ip']}\n";
+				}
 			} else {
-				if ($result['isVPS'] == 'Yes')
+				if ($result['isVPS'] == 'Yes') {
 					echo "Found Reusable VPS Fantastico License On IP {$db->Record['license_ip']}\n";
+				}
 			}
 		}
 	}
@@ -126,7 +132,8 @@ function get_available_fantastico($type) {
  * @param mixed $type
  * @return bool
  */
-function activate_fantastico($ipAddress, $type) {
+function activate_fantastico($ipAddress, $type)
+{
 	ini_set('max_execution_time', 1000); // just put a lot of time
 	ini_set('default_socket_timeout', 1000); // same
 	$db = get_module_db('licenses');
@@ -145,13 +152,13 @@ function activate_fantastico($ipAddress, $type) {
 				if ($result['isVPS'] == 'No') {
 					$result = $fantastico->editIp($db->Record['license_ip'], $ipAddress);
 					myadmin_log('licenses', 'info', "Fantastico Re-Using IP {$db->Record['license_ip']} Type $type As $ipAddress result: ".myadmin_stringify($result, 'json'), __LINE__, __FILE__);
-					return TRUE;
+					return true;
 				}
 			} else {
 				if ($result['isVPS'] == 'Yes') {
 					$result = $fantastico->editIp($db->Record['license_ip'], $ipAddress);
 					myadmin_log('licenses', 'info', "Fantastico Re-Using IP {$db->Record['license_ip']} Type $type As $ipAddress result: ".myadmin_stringify($result, 'json'), __LINE__, __FILE__);
-					return TRUE;
+					return true;
 				}
 			}
 		}
@@ -159,16 +166,17 @@ function activate_fantastico($ipAddress, $type) {
 	$result = $fantastico->addIp($ipAddress, $type);
 	if (isset($result['faultcode'])) {
 		myadmin_log('licenses', 'error', 'Fantastico addIp($ipAddress, $type) returned Fault '.$result['faultcode'].': '.$result['fault'], __LINE__, __FILE__);
-		return FALSE;
+		return false;
 	}
 	myadmin_log('licenses', 'info', "Fantastico New License $ipAddress Type $type Licensed ID {$result['id']}", __LINE__, __FILE__);
-	return TRUE;
+	return true;
 }
 
 /**
  * @return array
  */
-function get_reusable_fantastico() {
+function get_reusable_fantastico()
+{
 	$db = get_module_db('licenses');
 	$settings = \get_module_settings('licenses');
 	$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);

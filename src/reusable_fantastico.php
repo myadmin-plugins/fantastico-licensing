@@ -16,11 +16,12 @@ use Detain\Fantastico\Fantastico;
  * @throws \Exception
  * @throws \SmartyException
  */
-function reusable_fantastico() {
+function reusable_fantastico()
+{
 	page_title('ReUsable Fantastico Licenses');
 	if ($GLOBALS['tf']->ima == 'admin') {
 		$module = 'licenses';
-		$serviceTypes = run_event('get_service_types', FALSE, $module);
+		$serviceTypes = run_event('get_service_types', false, $module);
 		$db = get_module_db($module);
 		$settings = \get_module_settings($module);
 		$fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
@@ -32,13 +33,14 @@ function reusable_fantastico() {
 				$db->query("select * from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='{$module}' and services_category=".get_service_define('FANTASTICO')." and license_ip='{$ipAddress}'", __LINE__, __FILE__);
 				if ($db->num_rows() == 0) {
 					$result = $fantastico->getIpDetails($ipAddress);
-					if ($result['isVPS'] == 'Yes')
+					if ($result['isVPS'] == 'Yes') {
 						$type = 5013;
-					else
+					} else {
 						$type = 5003;
+					}
 					$serviceCost = $serviceTypes[$type]['services_cost'];
 					$db->query(make_insert_query($settings['TABLE'], [
-						$settings['PREFIX'].'_id' => NULL,
+						$settings['PREFIX'].'_id' => null,
 						$settings['PREFIX'].'_type' => $type,
 						$settings['PREFIX'].'_custid' => 8,
 						$settings['PREFIX'].'_cost' => $serviceCost,
