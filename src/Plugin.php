@@ -100,15 +100,15 @@ class Plugin
 		$loader = $event->getSubject();
 		$loader->add_page_requirement('crud_fantastico_list', '/../vendor/detain/crud/src/crud/crud_fantastico_list.php');
 		$loader->add_page_requirement('crud_reusable_fantastico', '/../vendor/detain/crud/src/crud/crud_reusable_fantastico.php');
-		$loader->add_requirement('get_fantastico_licenses', '/../vendor/detain/fantastico-licensing/src/fantastico.inc.php');
-		$loader->add_requirement('get_fantastico_list', '/../vendor/detain/fantastico-licensing/src/fantastico.inc.php');
-		$loader->add_page_requirement('fantastico_licenses_list', '/../vendor/detain/fantastico-licensing/src/fantastico_licenses_list.php');
-		$loader->add_page_requirement('fantastico_list', '/../vendor/detain/fantastico-licensing/src/fantastico_list.php');
-		$loader->add_requirement('get_available_fantastico', '/../vendor/detain/fantastico-licensing/src/fantastico.inc.php');
-		$loader->add_requirement('activate_fantastico', '/../vendor/detain/fantastico-licensing/src/fantastico.inc.php');
-		$loader->add_requirement('get_reusable_fantastico', '/../vendor/detain/fantastico-licensing/src/fantastico.inc.php');
-		$loader->add_page_requirement('reusable_fantastico', '/../vendor/detain/fantastico-licensing/src/reusable_fantastico.php');
-		$loader->add_requirement('class.Fantastico', '/../vendor/detain/fantastico-licensing/src/Fantastico.php', '\\Detain\\Fantastico\\');
+		$loader->add_requirement('get_fantastico_licenses', '/../vendor/detain/myadmin-fantastico-licensing/src/fantastico.inc.php');
+		$loader->add_requirement('get_fantastico_list', '/../vendor/detain/myadmin-fantastico-licensing/src/fantastico.inc.php');
+		$loader->add_page_requirement('fantastico_licenses_list', '/../vendor/detain/myadmin-fantastico-licensing/src/fantastico_licenses_list.php');
+		$loader->add_page_requirement('fantastico_list', '/../vendor/detain/myadmin-fantastico-licensing/src/fantastico_list.php');
+		$loader->add_requirement('get_available_fantastico', '/../vendor/detain/myadmin-fantastico-licensing/src/fantastico.inc.php');
+		$loader->add_requirement('activate_fantastico', '/../vendor/detain/myadmin-fantastico-licensing/src/fantastico.inc.php');
+		$loader->add_requirement('get_reusable_fantastico', '/../vendor/detain/myadmin-fantastico-licensing/src/fantastico.inc.php');
+		$loader->add_page_requirement('reusable_fantastico', '/../vendor/detain/myadmin-fantastico-licensing/src/reusable_fantastico.php');
+		$loader->add_requirement('class.Fantastico', '/../vendor/detain/myadmin-fantastico-licensing/src/Fantastico.php', '\\Detain\\Fantastico\\');
 		$loader->add_page_requirement('vps_add_fantastico', '/vps/addons/vps_add_fantastico.php');
 	}
 
