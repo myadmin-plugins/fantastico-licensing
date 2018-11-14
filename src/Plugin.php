@@ -86,9 +86,9 @@ class Plugin
 	{
 		$menu = $event->getSubject();
 		if ($GLOBALS['tf']->ima == 'admin') {
-			$menu->add_link(self::$module, 'choice=none.reusable_fantastico', '/images/myadmin/replicate-rows.png', 'ReUsable Fantastico Licenses');
-			$menu->add_link(self::$module, 'choice=none.fantastico_list', '/images/myadmin/active-directory.png', 'Fantastico Licenses Breakdown');
-			$menu->add_link(self::$module.'api', 'choice=none.fantastico_licenses_list', '/images/myadmin/list.png', 'List all Fantastico Licenses');
+			$menu->add_link(self::$module, 'choice=none.reusable_fantastico', '/images/myadmin/replicate-rows.png', __('ReUsable Fantastico Licenses'));
+			$menu->add_link(self::$module, 'choice=none.fantastico_list', '/images/myadmin/active-directory.png', __('Fantastico Licenses Breakdown'));
+			$menu->add_link(self::$module.'api', 'choice=none.fantastico_licenses_list', '/images/myadmin/list.png', __('List all Fantastico Licenses'));
 		}
 	}
 
@@ -97,7 +97,10 @@ class Plugin
 	 */
 	public static function getRequirements(GenericEvent $event)
 	{
-		$loader = $event->getSubject();
+        /**
+         * @var \MyAdmin\Plugins\Loader $this->loader
+         */
+        $loader = $event->getSubject();
 		$loader->add_page_requirement('crud_fantastico_list', '/../vendor/detain/crud/src/crud/crud_fantastico_list.php');
 		$loader->add_page_requirement('crud_reusable_fantastico', '/../vendor/detain/crud/src/crud/crud_reusable_fantastico.php');
 		$loader->add_requirement('get_fantastico_licenses', '/../vendor/detain/myadmin-fantastico-licensing/src/fantastico.inc.php');
@@ -115,11 +118,14 @@ class Plugin
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-	public static function getSettings(GenericEvent $event)
-	{
-		$settings = $event->getSubject();
-		$settings->add_text_setting(self::$module, 'Fantastico', 'fantastico_username', 'Fantastico Username:', 'Fantastico Username', $settings->get_setting('FANTASTICO_USERNAME'));
-		$settings->add_text_setting(self::$module, 'Fantastico', 'fantastico_password', 'Fantastico Password:', 'Fantastico Password', $settings->get_setting('FANTASTICO_PASSWORD'));
-		$settings->add_dropdown_setting(self::$module, 'Fantastico', 'outofstock_licenses_fantastico', 'Out Of Stock Fantastico Licenses', 'Enable/Disable Sales Of This Type', $settings->get_setting('OUTOFSTOCK_LICENSES_FANTASTICO'), ['0', '1'], ['No', 'Yes']);
+    public static function getSettings(GenericEvent $event)
+    {
+        /**
+         * @var \MyAdmin\Settings $settings
+         **/
+        $settings = $event->getSubject();
+		$settings->add_text_setting(self::$module, __('Fantastico'), 'fantastico_username', __('Fantastico Username'), __('Fantastico Username'), $settings->get_setting('FANTASTICO_USERNAME'));
+		$settings->add_text_setting(self::$module, __('Fantastico'), 'fantastico_password', __('Fantastico Password'), __('Fantastico Password'), $settings->get_setting('FANTASTICO_PASSWORD'));
+		$settings->add_dropdown_setting(self::$module, __('Fantastico'), 'outofstock_licenses_fantastico', __('Out Of Stock Fantastico Licenses'), __('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_LICENSES_FANTASTICO'), ['0', '1'], ['No', 'Yes']);
 	}
 }
