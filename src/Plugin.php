@@ -86,9 +86,9 @@ class Plugin
 	{
 		$menu = $event->getSubject();
 		if ($GLOBALS['tf']->ima == 'admin') {
-			$menu->add_link(self::$module, 'choice=none.reusable_fantastico', '/images/myadmin/replicate-rows.png', __('ReUsable Fantastico Licenses'));
-			$menu->add_link(self::$module, 'choice=none.fantastico_list', '/images/myadmin/active-directory.png', __('Fantastico Licenses Breakdown'));
-			$menu->add_link(self::$module.'api', 'choice=none.fantastico_licenses_list', '/images/myadmin/list.png', __('List all Fantastico Licenses'));
+			$menu->add_link(self::$module, 'choice=none.reusable_fantastico', '/images/myadmin/replicate-rows.png', _('ReUsable Fantastico Licenses'));
+			$menu->add_link(self::$module, 'choice=none.fantastico_list', '/images/myadmin/active-directory.png', _('Fantastico Licenses Breakdown'));
+			$menu->add_link(self::$module.'api', 'choice=none.fantastico_licenses_list', '/images/myadmin/list.png', _('List all Fantastico Licenses'));
 		}
 	}
 
@@ -124,8 +124,8 @@ class Plugin
          * @var \MyAdmin\Settings $settings
          **/
         $settings = $event->getSubject();
-		$settings->add_text_setting(self::$module, __('Fantastico'), 'fantastico_username', __('Fantastico Username'), __('Fantastico Username'), $settings->get_setting('FANTASTICO_USERNAME'));
-		$settings->add_text_setting(self::$module, __('Fantastico'), 'fantastico_password', __('Fantastico Password'), __('Fantastico Password'), $settings->get_setting('FANTASTICO_PASSWORD'));
-		$settings->add_dropdown_setting(self::$module, __('Fantastico'), 'outofstock_licenses_fantastico', __('Out Of Stock Fantastico Licenses'), __('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_LICENSES_FANTASTICO'), ['0', '1'], ['No', 'Yes']);
+		$settings->add_text_setting(self::$module, _('Fantastico'), 'fantastico_username', _('Fantastico Username'), _('Fantastico Username'), $settings->get_setting('FANTASTICO_USERNAME'));
+		$settings->add_text_setting(self::$module, _('Fantastico'), 'fantastico_password', _('Fantastico Password'), _('Fantastico Password'), $settings->get_setting('FANTASTICO_PASSWORD'));
+		$settings->add_dropdown_setting(self::$module, _('Fantastico'), 'outofstock_licenses_fantastico', _('Out Of Stock Fantastico Licenses'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_LICENSES_FANTASTICO'), ['0', '1'], ['No', 'Yes']);
 	}
 }
