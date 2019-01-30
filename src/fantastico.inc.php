@@ -169,7 +169,7 @@ function activate_fantastico($ipAddress, $type)
 		return false;
 	}
 	myadmin_log('licenses', 'info', "Fantastico New License $ipAddress Type $type Licensed ID {$result['id']}", __LINE__, __FILE__);
-	return true;
+    return $result['id'];
 }
 
 /**

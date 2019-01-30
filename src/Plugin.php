@@ -49,7 +49,12 @@ class Plugin
 		if ($event['category'] == get_service_define('FANTASTICO')) {
 			myadmin_log(self::$module, 'info', 'Fantastico Activation', __LINE__, __FILE__);
 			function_requirements('activate_fantastico');
-			activate_fantastico($serviceClass->getIp(), $event['field1']);
+			$result = activate_fantastico($serviceClass->getIp(), $event['field1']);
+            if ($result !== false) {
+                $serviceClass
+                    ->setKey($response['licenseid'])
+                    ->save;
+            }
 			$event->stopPropagation();
 		}
 	}
