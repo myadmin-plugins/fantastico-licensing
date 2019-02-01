@@ -53,7 +53,7 @@ class Plugin
             if ($result !== false) {
                 $serviceClass
                     ->setKey($response['licenseid'])
-                    ->save;
+                    ->save();
             }
 			$event->stopPropagation();
 		}
