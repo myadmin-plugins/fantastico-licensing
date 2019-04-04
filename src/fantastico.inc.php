@@ -36,7 +36,9 @@ function get_fantastico_list()
 	foreach ($ipValues as $data) {
 		$data['addedOn'] = explode(' ', $data['addedOn']);
 		$data['addedOn'] = array_shift($data['addedOn']);
-		$ipdata[$data['ipAddress']] = array_merge($data, [
+		$ipdata[$data['ipAddress']] = array_merge(
+			$data,
+			[
 			'hostname' => '',
 			'billing_status' => '',
 			'account_lid' => '',
@@ -169,7 +171,7 @@ function activate_fantastico($ipAddress, $type)
 		return false;
 	}
 	myadmin_log('licenses', 'info', "Fantastico New License $ipAddress Type $type Licensed ID {$result['id']}", __LINE__, __FILE__);
-    return $result['id'];
+	return $result['id'];
 }
 
 /**

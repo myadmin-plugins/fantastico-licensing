@@ -39,7 +39,9 @@ function reusable_fantastico()
 						$type = 5003;
 					}
 					$serviceCost = $serviceTypes[$type]['services_cost'];
-					$db->query(make_insert_query($settings['TABLE'], [
+					$db->query(make_insert_query(
+						$settings['TABLE'],
+						[
 						$settings['PREFIX'].'_id' => null,
 						$settings['PREFIX'].'_type' => $type,
 						$settings['PREFIX'].'_custid' => 8,

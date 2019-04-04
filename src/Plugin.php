@@ -50,11 +50,11 @@ class Plugin
 			myadmin_log(self::$module, 'info', 'Fantastico Activation', __LINE__, __FILE__, self::$module, $serviceClass->getId());
 			function_requirements('activate_fantastico');
 			$result = activate_fantastico($serviceClass->getIp(), $event['field1']);
-            if ($result !== false) {
-                $serviceClass
-                    ->setKey($response['licenseid'])
-                    ->save();
-            }
+			if ($result !== false) {
+				$serviceClass
+					->setKey($response['licenseid'])
+					->save();
+			}
 			$event->stopPropagation();
 		}
 	}
@@ -102,10 +102,10 @@ class Plugin
 	 */
 	public static function getRequirements(GenericEvent $event)
 	{
-        /**
-         * @var \MyAdmin\Plugins\Loader $this->loader
-         */
-        $loader = $event->getSubject();
+		/**
+		 * @var \MyAdmin\Plugins\Loader $this->loader
+		 */
+		$loader = $event->getSubject();
 		$loader->add_page_requirement('crud_fantastico_list', '/../vendor/detain/crud/src/crud/crud_fantastico_list.php');
 		$loader->add_page_requirement('crud_reusable_fantastico', '/../vendor/detain/crud/src/crud/crud_reusable_fantastico.php');
 		$loader->add_requirement('get_fantastico_licenses', '/../vendor/detain/myadmin-fantastico-licensing/src/fantastico.inc.php');
@@ -123,12 +123,12 @@ class Plugin
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-    public static function getSettings(GenericEvent $event)
-    {
-        /**
-         * @var \MyAdmin\Settings $settings
-         **/
-        $settings = $event->getSubject();
+	public static function getSettings(GenericEvent $event)
+	{
+		/**
+		 * @var \MyAdmin\Settings $settings
+		 **/
+		$settings = $event->getSubject();
 		$settings->add_text_setting(self::$module, _('Fantastico'), 'fantastico_username', _('Fantastico Username'), _('Fantastico Username'), $settings->get_setting('FANTASTICO_USERNAME'));
 		$settings->add_text_setting(self::$module, _('Fantastico'), 'fantastico_password', _('Fantastico Password'), _('Fantastico Password'), $settings->get_setting('FANTASTICO_PASSWORD'));
 		$settings->add_dropdown_setting(self::$module, _('Fantastico'), 'outofstock_licenses_fantastico', _('Out Of Stock Fantastico Licenses'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_LICENSES_FANTASTICO'), ['0', '1'], ['No', 'Yes']);
