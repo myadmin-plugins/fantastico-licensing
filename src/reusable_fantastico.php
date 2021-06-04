@@ -39,14 +39,10 @@ function reusable_fantastico()
 						$type = 5003;
 					}
 					$serviceCost = $serviceTypes[$type]['services_cost'];
-					$db->query(make_insert_query(
-						$settings['TABLE'],
-						[
+					$db->query(make_insert_query($settings['TABLE'], [
 						$settings['PREFIX'].'_id' => null,
 						$settings['PREFIX'].'_type' => $type,
 						$settings['PREFIX'].'_custid' => 8,
-						$settings['PREFIX'].'_cost' => $serviceCost,
-						$settings['PREFIX'].'_frequency' => $frequency,
 						$settings['PREFIX'].'_order_date' => mysql_now(),
 						$settings['PREFIX'].'_ip' => $ipAddress,
 						$settings['PREFIX'].'_status' => 'canceled',
@@ -54,8 +50,7 @@ function reusable_fantastico()
 						$settings['PREFIX'].'_coupon' => 0,
 						$settings['PREFIX'].'_extra' => '',
 						$settings['PREFIX'].'_hostname' => ''
-																   ]
-							   ), __LINE__, __FILE__);
+					]), __LINE__, __FILE__);
 				} else {
 					//var_dump($fantastico->getIpDetails($ipAddress));
 					dialog('Error', 'IP Already Licensed For Fantastico In Our DB');
