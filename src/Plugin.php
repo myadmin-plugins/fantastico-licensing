@@ -130,7 +130,7 @@ class Plugin
          **/
         $settings = $event->getSubject();
         $settings->add_text_setting(self::$module, _('Fantastico'), 'fantastico_username', _('Fantastico Username'), _('Fantastico Username'), $settings->get_setting('FANTASTICO_USERNAME'));
-        $settings->add_text_setting(self::$module, _('Fantastico'), 'fantastico_password', _('Fantastico Password'), _('Fantastico Password'), $settings->get_setting('FANTASTICO_PASSWORD'));
+        $settings->add_password_setting(self::$module, _('Fantastico'), 'fantastico_password', _('Fantastico Password'), _('Fantastico Password'), $settings->get_setting('FANTASTICO_PASSWORD'));
         $settings->add_dropdown_setting(self::$module, _('Fantastico'), 'outofstock_licenses_fantastico', _('Out Of Stock Fantastico Licenses'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_LICENSES_FANTASTICO'), ['0', '1'], ['No', 'Yes']);
     }
 }
