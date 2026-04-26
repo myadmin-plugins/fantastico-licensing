@@ -300,7 +300,7 @@ class SourceFileAnalysisTest extends TestCase
     public function testLicensesListChecksAdmin(): void
     {
         $content = file_get_contents(self::$srcDir . '/fantastico_licenses_list.php');
-        $this->assertStringContainsString("\$GLOBALS['tf']->ima == 'admin'", $content);
+        $this->assertStringContainsString("\\MyAdmin\App::ima() == 'admin'", $content);
     }
 
     /**
@@ -341,7 +341,7 @@ class SourceFileAnalysisTest extends TestCase
     public function testListChecksAdmin(): void
     {
         $content = file_get_contents(self::$srcDir . '/fantastico_list.php');
-        $this->assertStringContainsString("\$GLOBALS['tf']->ima == 'admin'", $content);
+        $this->assertStringContainsString("\\MyAdmin\App::ima() == 'admin'", $content);
     }
 
     /**
@@ -391,7 +391,7 @@ class SourceFileAnalysisTest extends TestCase
     public function testReusableChecksAdmin(): void
     {
         $content = file_get_contents(self::$srcDir . '/reusable_fantastico.php');
-        $this->assertStringContainsString("\$GLOBALS['tf']->ima == 'admin'", $content);
+        $this->assertStringContainsString("\\MyAdmin\App::ima() == 'admin'", $content);
     }
 
     /**

@@ -19,7 +19,7 @@ use Detain\Fantastico\Fantastico;
 function reusable_fantastico()
 {
     page_title('ReUsable Fantastico Licenses');
-    if ($GLOBALS['tf']->ima == 'admin') {
+    if (\MyAdmin\App::ima() == 'admin') {
         $module = 'licenses';
         $serviceTypes = run_event('get_service_types', false, $module);
         $db = get_module_db($module);
@@ -27,8 +27,8 @@ function reusable_fantastico()
         $fantastico = new Fantastico(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
         $ips = $fantastico->getIpList(Fantastico::ALL_TYPES);
         $frequency = 1;
-        if (isset($GLOBALS['tf']->variables->request['add']) && $GLOBALS['tf']->variables->request['add'] == 1) {
-            $ipAddress = $db->real_escape($GLOBALS['tf']->variables->request['ip']);
+        if (isset(\MyAdmin\App::variables()->request['add']) && \MyAdmin\App::variables()->request['add'] == 1) {
+            $ipAddress = $db->real_escape(\MyAdmin\App::variables()->request['ip']);
             if (in_array($ipAddress, $ips)) {
                 $db->query("select * from {$settings['TABLE']} left join services on {$settings['PREFIX']}_type=services_id where services_module='{$module}' and services_category=".get_service_define('FANTASTICO')." and license_ip='{$ipAddress}'", __LINE__, __FILE__);
                 if ($db->num_rows() == 0) {

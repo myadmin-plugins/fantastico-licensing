@@ -11,7 +11,7 @@ use Detain\Fantastico\Fantastico;
 
 function fantastico_list()
 {
-    if ($GLOBALS['tf']->ima == 'admin') {
+    if (\MyAdmin\App::ima() == 'admin') {
         page_title('Fantastico License List');
         add_output(render_form('fantastico_list'));
     }
