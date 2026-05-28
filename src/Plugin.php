@@ -54,6 +54,10 @@ class Plugin
                 $serviceClass
                     ->setKey($response['licenseid'])
                     ->save();
+            } else {
+                $event['success'] = false;
+                myadmin_log(self::$module, 'error', 'Fantastico activate_fantastico returned false for IP '.$serviceClass->getIp().' Type '.$event['field1'], __LINE__, __FILE__, self::$module, $serviceClass->getId());
+                chatNotify('Failed [License '.$serviceClass->getId().'](https://my.interserver.net/admin/view_service?id='.$serviceClass->getId().'&module=licenses) Fantastico Activation IP:'.$serviceClass->getIp().' Type:'.$event['field1'].' - activate_fantastico() returned false', 'notifications');
             }
             $event->stopPropagation();
         }
