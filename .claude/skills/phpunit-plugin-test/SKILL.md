@@ -1,6 +1,6 @@
 ---
 name: phpunit-plugin-test
-description: Writes PHPUnit 9 tests in `tests/` for the Fantastico licensing plugin following the `PluginTest.php` and `SourceFileAnalysisTest.php` patterns. Use when user says 'add test', 'write tests', 'test the plugin', 'write a test for', or when modifying `Plugin.php` or `src/*.php` files. Covers reflection-based structural tests and static file analysis via `file_get_contents`. Do NOT use for integration tests requiring a live DB, SOAP API calls, or MyAdmin environment bootstrapping. NOTE: for a plugin's contract/behavioral tests (tests/ContractTest.php, the shared harness, composer myadmin:scaffold-tests) use the plugin-contract-tests skill instead — this skill's reflection-only guidance predates that harness.
+description: Writes PHPUnit 9 tests in `tests/` for the Fantastico licensing plugin following the `PluginTest.php` and `SourceFileAnalysisTest.php` patterns. Use when user says 'add test', 'write tests', 'test the plugin', 'write a test for', or when modifying `Plugin.php` or `src/*.php` files. Covers reflection-based structural tests and static file analysis via `file_get_contents`. Do NOT use for integration tests requiring a live DB, SOAP API calls, or MyAdmin environment bootstrapping. For a plugin's contract or behavioral tests (tests/ContractTest.php, the shared harness, composer myadmin:scaffold-tests) use the plugin-contract-tests skill instead — this skill's reflection-only guidance predates that harness.
 ---
 <!-- myadmin-contract-harness-notice -->
 > ### ⚠️ Read this before the rest of the file
