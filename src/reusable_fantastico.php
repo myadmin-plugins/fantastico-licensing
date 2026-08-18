@@ -44,6 +44,7 @@ function reusable_fantastico()
                         $settings['PREFIX'].'_type' => $type,
                         $settings['PREFIX'].'_custid' => 8,
                         $settings['PREFIX'].'_order_date' => mysql_now(),
+                        $settings['PREFIX'].'_uuid' => new_uuid_sql(mysql_now()),
                         $settings['PREFIX'].'_ip' => $ipAddress,
                         $settings['PREFIX'].'_status' => 'canceled',
                         $settings['PREFIX'].'_invoice' => 0,
